@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DashboardViewModel : ViewModel() {
@@ -15,16 +13,27 @@ class DashboardViewModel : ViewModel() {
     private val _myData = MutableLiveData("Tester")
     val myData = _myData as LiveData<String>
 
-    private val _myDataFlow = MutableStateFlow("Tester")
-    val myDataFlow = _myDataFlow.asStateFlow()
+    private val _myDataStateFlow = MutableStateFlow("Tester")
+    val myDataStateFlow = _myDataStateFlow.asStateFlow()
+
+    private val _myDataShareFlow = MutableSharedFlow<String>()
+    val myDataSharedFlow = _myDataShareFlow.asSharedFlow()
 
     fun setData(data: String) {
         _myData.value = data
     }
 
-    fun setDataFlow(dataFlow: String) {
+    fun setDataStateFlow(dataStateFlow: String) {
+        _myDataStateFlow.value = dataStateFlow
+      /*  viewModelScope.launch {
+            _myDataStateFlow.emit(dataStateFlow)
+        }*/
+    }
+
+    fun setDataSharedFlow(dataSharedFlow: String) {
         viewModelScope.launch {
-            _myDataFlow.emit(dataFlow)
+            _myDataShareFlow
+                .emit(dataSharedFlow)
         }
     }
 
