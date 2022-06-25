@@ -3,15 +3,12 @@ package com.module.appcheckup.screens
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.module.appcheckup.databinding.ActivityDashboardBinding
-import kotlinx.coroutines.launch
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDashboardBinding
+    //private val dashboardViewModel: DashboardViewModel by viewModels() // test purpose
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +23,15 @@ class DashboardActivity : AppCompatActivity() {
             updateFragment(DashboardViewFragment.newInstance())
         }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
+        /* lifecycleScope.launch {
+             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-            }
-        }
+             }
+         }
+
+         dashboardViewModel.myData.observe(this) {
+
+         }*/
     }
 
     fun updateFragment(fragment: Fragment) {
