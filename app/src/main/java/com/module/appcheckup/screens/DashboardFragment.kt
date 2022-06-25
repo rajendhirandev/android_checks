@@ -7,12 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.module.appcheckup.databinding.DashboardFragmentBinding
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import com.module.appcheckup.launchAndCollectIn
 
 class DashboardFragment : Fragment() {
 
@@ -49,21 +45,41 @@ class DashboardFragment : Fragment() {
              Toast.makeText(context, "I'm in LiveData", Toast.LENGTH_SHORT).show()
          }*/
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        dashboardViewModel.myDataStateFlow.launchAndCollectIn(viewLifecycleOwner) {
+            binding.tvLog.text = it
+            Toast.makeText(context, "I'm in StateFlow", Toast.LENGTH_SHORT).show()
+        }
+
+        dashboardViewModel.myDataSharedFlow.launchAndCollectIn(viewLifecycleOwner) {
+            binding.tvLog.text = it
+            Toast.makeText(context, "I'm in SharedFlow", Toast.LENGTH_SHORT).show()
+        }
+
+       /* dashboardViewModel.updateData().launchAndCollectIn(viewLifecycleOwner) {
+            binding.tvLog.text = it.toString()
+        }*/
+
+        /*viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                /* launch {
+                *//* launch {
                      dashboardViewModel.updateData().collectLatest {
                          binding.tvLog.text = it.toString()
                      }
-                 }*/
-
-                /*launch {
+                 }*//*
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                *//*launch {
                     dashboardViewModel.myDataStateFlow.collectLatest {
                         binding.tvLog.text = it
                         Toast.makeText(context, "I'm in StateFlow", Toast.LENGTH_SHORT).show()
                     }
-                }*/
-
+                }*//*
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     dashboardViewModel.myDataSharedFlow.collectLatest {
                         binding.tvLog.text = it
@@ -71,7 +87,7 @@ class DashboardFragment : Fragment() {
                     }
                 }
             }
-        }
+        }*/
     }
 
     companion object {
