@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.module.appcheckup.databinding.DashboardFragmentBinding
 import com.module.appcheckup.launchAndCollectIn
+import kotlinx.coroutines.flow.collectLatest
 
 class DashboardFragment : Fragment() {
 
@@ -57,6 +59,12 @@ class DashboardFragment : Fragment() {
 
        /* dashboardViewModel.updateData().launchAndCollectIn(viewLifecycleOwner) {
             binding.tvLog.text = it.toString()
+        }*/
+
+       /* lifecycleScope.launchWhenStarted {
+            dashboardViewModel.updateData().collectLatest {
+                binding.tvLog.text = it.toString()
+            }
         }*/
 
         /*viewLifecycleOwner.lifecycleScope.launch {
