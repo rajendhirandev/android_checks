@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.module.appcheckup.databinding.DashboardFragmentBinding
 import com.module.appcheckup.launchAndCollectIn
-import kotlinx.coroutines.flow.collectLatest
 
 class DashboardFragment : Fragment() {
 
     private lateinit var binding: DashboardFragmentBinding
-    private val dashboardViewModel: DashboardViewModel by activityViewModels()
+    private val dashboardViewModel: DashboardViewModel by activityViewModels { ViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +54,10 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.myDataSharedFlow.launchAndCollectIn(viewLifecycleOwner) {
             binding.tvLog.text = it
             Toast.makeText(context, "I'm in SharedFlow", Toast.LENGTH_SHORT).show()
+        }
+
+        dashboardViewModel.getData().launchAndCollectIn(viewLifecycleOwner){
+            binding.tvLog.text = it.toString()
         }
 
        /* dashboardViewModel.updateData().launchAndCollectIn(viewLifecycleOwner) {

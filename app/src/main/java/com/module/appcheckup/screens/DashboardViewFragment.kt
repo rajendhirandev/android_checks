@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.module.appcheckup.databinding.DashboardViewFragmentBinding
 
@@ -31,7 +30,10 @@ class DashboardViewFragment : Fragment() {
         //dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java) // Deprecated
         //dashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java) // by viewModels()
         dashboardViewModel =
-            ViewModelProvider(requireActivity()).get(DashboardViewModel::class.java) // by activityViewModels()
+            ViewModelProvider(
+                requireActivity(),
+                ViewModelFactory()
+            ).get(DashboardViewModel::class.java) // by activityViewModels()
         dashboardViewModel.myData.observe(viewLifecycleOwner) {
             binding.tvLog.text = it
         }
