@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/consumerFragment">
+
+    <fragment
+        android:id="@+id/consumerFragment"
+        android:name="com.module.appcheckup.ConsumerFragment"
+        android:label="Consumer Input"
+        tools:layout="@layout/fragment_consumer">
+        <action
+            android:id="@+id/action_consumer_to_detail_fragment"
+            app:destination="@id/consumerDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consumerDetailFragment"
+        android:name="com.module.appcheckup.ConsumerDetailFragment"
+        android:label="Consumer Detail"
+        tools:layout="@layout/fragment_consumer_detail">
+        <argument
+            android:name="vname"
+            app:argType="string" />
+        <argument
+            android:name="vyob"
+            app:argType="string" />
+        <argument
+            android:name="dataObj"
+            app:argType="com.module.appcheckup.ConsumerData" />
+    </fragment>
+</navigation>

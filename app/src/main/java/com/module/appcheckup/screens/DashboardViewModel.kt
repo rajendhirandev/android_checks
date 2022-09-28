@@ -1,9 +1,6 @@
 package com.module.appcheckup.screens
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -21,8 +18,22 @@ class DashboardViewModel(val repo:DashboardRepo) : ViewModel() {
     private val _myDataShareFlow = MutableSharedFlow<String>()
     val myDataSharedFlow = _myDataShareFlow.asSharedFlow()
 
+    private val _l1 = MutableLiveData<Int>()
+    val l1 = _l1 as LiveData<Int>
+
+    private val _l2 = MutableLiveData<String>()
+    val l2 = _l2 as LiveData<String>
+
+    private val ml = MediatorLiveData<String>()
+
+
     fun setData(data: String) {
         _myData.value = data
+        ml.addSource(
+            l1,
+        ) {
+
+        }
     }
 
     fun setDataStateFlow(dataStateFlow: String) {
