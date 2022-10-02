@@ -3,9 +3,11 @@ package com.module.appcheckup.screens
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.module.appcheckup.R
@@ -31,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
         //navController = findNavController(R.id.navigation_fragment_view)
         appBarConfig = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfig)
+        //NavigationUI.setupActionBarWithNavController(this,navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
