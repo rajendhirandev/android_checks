@@ -27,13 +27,17 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initialize() {
         setSupportActionBar(binding.toolbar)
-         // While Using FragmentContainerView
-        navController = (supportFragmentManager.findFragmentById(R.id.navigation_fragment_view) as NavHostFragment).navController
-         // While Using Fragment
+
+        // While Using FragmentContainerView
+        navController =
+            (supportFragmentManager.findFragmentById(R.id.navigation_fragment_view) as NavHostFragment).navController
+
+        // While Using Fragment
         //navController = findNavController(R.id.navigation_fragment_view)
+
+        // Add Appbar config and navigation controller to the ActionBar
         appBarConfig = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfig)
-        //NavigationUI.setupActionBarWithNavController(this,navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
